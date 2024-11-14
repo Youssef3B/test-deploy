@@ -19,7 +19,7 @@ const savedPath = require("./routes/saved");
 
 // PORT SERVER
 
-const port = process.env.Port || 5000;
+const port = process.env.PORT || 5000;
 
 // Connection to Database
 
@@ -34,7 +34,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({ origin: "*" })); // Allow all origins (for testing)
 
 // Routes
 

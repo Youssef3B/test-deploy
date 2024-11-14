@@ -23,7 +23,11 @@ router.get("/allusers", async (req, res) => {
     const usersList = await User.find();
     res.status(200).json(usersList);
   } catch (error) {
-    res.status(500).json({ message: "Something wen Wrong", error });
+    // Moved the catch here
+    console.error(error); // Log the error to console for Render logs
+    res
+      .status(500)
+      .json({ message: "Something went wrong", error: error.message });
   }
 });
 
