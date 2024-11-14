@@ -24,13 +24,20 @@ const port = process.env.PORT || 5000;
 // Connection to Database
 
 mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => console.log(`Connected to MongoDb...`))
-  .catch((error) => console.log(`Connection Failed to MongoDb`, error));
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    connectTimeoutMS: 10000, // Timeout after 10 seconds
+    serverSelectionTimeoutMS: 10000, // Timeout after 10 seconds
+  })
+  .then(() => console.log("Connected to MongoDB..."))
+  .catch((error) => {
+    console.error("Connection to MongoDB failed:", error);
+  });
 
 // Init App
 const app = express();
-// Apply Middlewares
+// Apply Middlewaress
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
